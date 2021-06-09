@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "users")
@@ -27,7 +26,7 @@ public class User {
     private String gender;
 
     @Column(name = "date_of_birth", nullable = false)
-    private String dateOfBirth;
+    private LocalDateTime dateOfBirth;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -38,11 +37,11 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "tel_number")
-    private Long telNumber;
+    @Column(name = "phone_number")
+    private Long phoneNumber;
 
     @Column(name = "creation_date")
-    private Timestamp creationDate;
+    private LocalDateTime creationDate;
 
     @Column(name = "photo_id")
     private Long photoId;

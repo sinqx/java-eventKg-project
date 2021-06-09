@@ -33,9 +33,4 @@ public class UserController {
     public User deleteById(@PathVariable Long userId){
         return userService.deleteById(userId);
     }
-
-    @DeleteMapping
-    public List<User> deleteAllUsers(){
-        return userService.deleteAllUsers();
-    }
 }

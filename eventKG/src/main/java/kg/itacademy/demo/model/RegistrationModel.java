@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthModel {
-    private String login;
-    private String password;
+public class RegistrationModel {
+    String login;
+    String password;
+    String email;
+    String gender;
 }

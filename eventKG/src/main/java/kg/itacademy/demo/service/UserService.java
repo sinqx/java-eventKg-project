@@ -12,5 +12,4 @@ public interface UserService {
     User findByPartOfFullName(String username);
     String getTokenByAuthModel(AuthModel authModel);
     User deleteById(Long id);
-    List<User> deleteAllUsers();
 }
