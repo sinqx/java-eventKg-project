@@ -18,9 +18,11 @@ public class EventPhoto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "photo_id", nullable = false)
-    private Long photoId;
+    @JoinColumn(name = "photo_id", nullable = false)
+    @ManyToOne
+    private Photo photo;
 
-    @Column(name = "event_id", nullable = false)
-    private Long eventId;
+    @JoinColumn(name = "event_id", nullable = false)
+    @ManyToOne
+    private Event event;
 }

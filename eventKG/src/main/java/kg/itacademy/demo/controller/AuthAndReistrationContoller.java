@@ -22,7 +22,7 @@ public class AuthAndReistrationContoller {
     private UserRepository userRepository;
 
     @PostMapping("/sign-up")
-    public ResponseEntity save(@RequestBody User user) throws Exception {
+    public ResponseEntity save(@RequestBody User user) {
         try {
             User user1 = userService.saveWithPasswordEncode(user);
             return new ResponseEntity<>(user1, HttpStatus.OK);

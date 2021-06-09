@@ -9,7 +9,7 @@ public interface UserService {
     User saveWithPasswordEncode(User user) throws Exception;
     List<User> getAllUsers();
     User findById(Long id);
-    User findByPartOfFullName(String username);
+    User findByFullName(String username);
     String getTokenByAuthModel(AuthModel authModel);
     User deleteById(Long id);
 }

@@ -32,7 +32,6 @@ public class Event {
     @Column(name = "title", nullable = false)
     private String title;
 
-
     @Column(name = "description", nullable = false)
     private String description;
 
@@ -51,6 +50,12 @@ public class Event {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
+    @OneToOne
+    @JoinColumn(name = "event_type")
+    private EventType eventType;
 
+    @OneToOne
+    @JoinColumn(name = "event_status")
+    private EventStatus eventStatus;
 }
 
