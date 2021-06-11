@@ -12,7 +12,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public Photo save(Photo photo) {
-        return photoRepository.save(photo);
+        return photoRepository.save(photo); //??????
     }
 
     @Override

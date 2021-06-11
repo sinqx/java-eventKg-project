@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import kg.itacademy.demo.entity.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -22,11 +21,11 @@ public class Reaction {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
-    private Event eventId;
+    private Event event;
 
     @Column(name = "text", nullable = false)
     private String text;
@@ -36,5 +35,5 @@ public class Reaction {
 
     @ManyToOne
     @JoinColumn(name = "photo_id")
-    private Photo photoId;
+    private Photo photo;
 }

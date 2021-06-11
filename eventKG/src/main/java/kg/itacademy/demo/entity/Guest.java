@@ -20,7 +20,7 @@ public class Guest {
 
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
-    private Event eventId;
+    private Event event;
 
     @Column(name = "status", nullable = false)
     private Boolean status = false;

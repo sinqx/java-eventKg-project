@@ -24,7 +24,7 @@ public class Event {
     private Long id;
 
     @Column(name = "creator_id", nullable = false)
-    private Long creatorId;
+    private User creatorId;
 
     @Column(name = "main_photo_id")
     private Long mainPhotoId;
