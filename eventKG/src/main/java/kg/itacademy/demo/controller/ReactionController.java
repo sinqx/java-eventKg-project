@@ -1,9 +1,13 @@
 package kg.itacademy.demo.controller;
 
 import kg.itacademy.demo.entity.Reaction;
+import kg.itacademy.demo.model.CreateReactionModel;
 import kg.itacademy.demo.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/reactions")
@@ -11,9 +15,9 @@ public class ReactionController {
     @Autowired
     private ReactionService reactionService;
 
-    @GetMapping
-    public Reaction save(@RequestBody Reaction reaction){
-        return reactionService.save(reaction);
+    @PostMapping
+    public Reaction save(@RequestBody CreateReactionModel reactionModel){
+        return reactionService.save(reactionModel);
     }
 
     @GetMapping("/{reactionId}")
@@ -26,5 +30,19 @@ public class ReactionController {
         return reactionService.deleteById(reactionId);
     }
 
-    // + Все реакции определённого ивента
+    @GetMapping
+    public List<Reaction> getAllReactions() {
+        return reactionService.getAllReactions();
+    }
+
+    @GetMapping("/eventReaction/{eventId}") //???????
+    public List<Reaction> getAllEventReactions(@PathVariable Long eventId) {
+        return reactionService.getAllEventReactions(eventId);
+    }
+
+    @GetMapping("/my")
+    public List<Reaction> getAllUserReactions() {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return reactionService.getAllUserReactions(name);
+    }
 }

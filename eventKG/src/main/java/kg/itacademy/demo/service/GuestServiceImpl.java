@@ -2,10 +2,15 @@ package kg.itacademy.demo.service;
 
 import kg.itacademy.demo.entity.Event;
 import kg.itacademy.demo.entity.Guest;
+import kg.itacademy.demo.entity.User;
+import kg.itacademy.demo.model.CreateGuestModel;
 import kg.itacademy.demo.repository.EventRepository;
 import kg.itacademy.demo.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GuestServiceImpl implements GuestService{
@@ -13,13 +18,24 @@ public class GuestServiceImpl implements GuestService{
     private GuestRepository guestRepository;
 
     @Autowired
-    private EventRepository eventRepository;
+    private EventService eventService;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Guest save(Guest guest) {
-        Guest guest1 = new Guest();
-        Event event = eventRepository.findById((long)2).orElse(null);;
-        guest1.setEvent(event); //??
+        return guestRepository.save(guest);
+    }
+
+    @Override
+    public Guest save(CreateGuestModel guestModel) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByLogin(username);
+        Guest guest = Guest.builder()
+                .event(eventService.findById(guestModel.getEventId()))
+                .user(user)
+                .build();
         return guestRepository.save(guest);
     }
 
@@ -36,5 +52,10 @@ public class GuestServiceImpl implements GuestService{
             return guest;
         }
         return null;// Вернуть исключение
+    }
+
+    @Override
+    public List<Guest> findAllEventGuests(Long id) {
+        return guestRepository.findAllByEvent_Id(id);
     }
 }

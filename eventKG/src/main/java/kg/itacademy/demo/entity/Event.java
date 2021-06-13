@@ -23,20 +23,19 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "creator_id", nullable = false)
-    private User creatorId;
+    @ManyToOne
+    @JoinColumn(name = "creator_id", nullable = false)
+    private User creatorUser;
 
-    @Column(name = "main_photo_id")
-    private Long mainPhotoId;
+    @OneToOne
+    @JoinColumn(name = "main_photo_id")
+    private Photo mainPhoto;
 
     @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "description", nullable = false)
     private String description;
-
-    @Column(name = "type", nullable = false)
-    private String type;
 
     @Column(name = "views")
     private Long views;
@@ -50,11 +49,11 @@ public class Event {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    @OneToOne
+    @ManyToOne //???
     @JoinColumn(name = "event_type")
     private EventType eventType;
 
-    @OneToOne
+    @ManyToOne //???
     @JoinColumn(name = "event_status")
     private EventStatus eventStatus;
 }

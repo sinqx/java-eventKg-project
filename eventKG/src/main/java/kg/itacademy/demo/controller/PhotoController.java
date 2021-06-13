@@ -11,7 +11,7 @@ public class PhotoController {
     @Autowired
     private PhotoService photoService;
 
-    @GetMapping
+    @PostMapping
     public Photo save(@RequestBody Photo photo){
         return photoService.save(photo);
     }

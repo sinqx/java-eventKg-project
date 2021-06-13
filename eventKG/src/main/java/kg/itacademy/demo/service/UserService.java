@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface UserService {
     User saveWithPasswordEncode(User user) throws Exception;
+    User save(User user);
     List<User> getAllUsers();
     User findById(Long id);
-    User findByFullName(String username);
+    User findByLogin(String username);
     String getTokenByAuthModel(AuthModel authModel);
     User deleteById(Long id);
 }

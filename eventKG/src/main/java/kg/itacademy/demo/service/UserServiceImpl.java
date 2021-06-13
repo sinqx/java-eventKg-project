@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     private UserRoleService userRoleService;
 
     @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
     public User saveWithPasswordEncode(User user){
         Optional<User> userLoginCheck = userRepository.findByFullName(user.getFullName());
         Optional<User> userEmailCheck = userRepository.findByEmail(user.getEmail());
@@ -46,14 +51,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByFullName(String username) {
+    public User findByLogin(String username) {
         return userRepository.findByFullName(username).orElse(null);// Вернуть исключение и доделать
     }
 
     @Override
     public String getTokenByAuthModel(AuthModel authModel) {
         String authResult = "";
-        User user = findByFullName(authModel.getLogin());
+        User user = findByLogin(authModel.getLogin());
         if (user == null) authResult = "Неверный логин/пароль";
         else {
             if (passwordEncoder.matches(authModel.getPassword(), user.getPassword())) {

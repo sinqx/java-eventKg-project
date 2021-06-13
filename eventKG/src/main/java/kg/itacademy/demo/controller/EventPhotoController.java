@@ -5,26 +5,31 @@ import kg.itacademy.demo.service.EventPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/eventPhotos")
 public class EventPhotoController {
     @Autowired
     private EventPhotoService eventPhotoService;
 
-    @GetMapping
+    @PostMapping
     public EventPhoto save(@RequestBody EventPhoto eventPhoto){
         return eventPhotoService.save(eventPhoto);
     }
 
-    @GetMapping("/{eventId}")
+    @GetMapping("/{eventPhotoId}")
     public EventPhoto getById(@PathVariable Long eventPhotoId){
         return eventPhotoService.findById(eventPhotoId);
     }
 
-    @DeleteMapping("/{eventId}")
+    @DeleteMapping("/{eventPhotoId}")
     public EventPhoto deleteById(@PathVariable Long eventPhotoId){
         return eventPhotoService.deleteById(eventPhotoId);
     }
 
-    // Получить все фотки ивента
+    @GetMapping("event/{eventId}")
+    public List<EventPhoto> getAllEventPhoto(@PathVariable Long eventId){ // Изменить название метода
+        return eventPhotoService.getAllEventPhoto(eventId);
+    }
 }
