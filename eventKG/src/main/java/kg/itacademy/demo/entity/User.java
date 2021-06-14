@@ -25,7 +25,7 @@ public class User {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "date_of_birth", nullable = false)
+    @Column(name = "date_of_birth")
     private LocalDateTime dateOfBirth;
 
     @Column(name = "email", nullable = false, unique = true)
