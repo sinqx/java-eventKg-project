@@ -14,5 +14,5 @@ public class CreateReactionModel {
     Long eventId;
     Long photoId;
     String text;
-    LocalDateTime publicationDate = LocalDateTime.now();
+    LocalDateTime publicationDate;
 }

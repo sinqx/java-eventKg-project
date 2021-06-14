@@ -28,8 +28,8 @@ public class EventPhotoController {
         return eventPhotoService.deleteById(eventPhotoId);
     }
 
-    @GetMapping("event/{eventId}")
-    public List<EventPhoto> getAllEventPhoto(@PathVariable Long eventId){ // Изменить название метода
+    @GetMapping("/event/{eventId}")
+    public List<EventPhoto> getAllEventPhoto(@PathVariable Long eventId){
         return eventPhotoService.getAllEventPhoto(eventId);
     }
 }
