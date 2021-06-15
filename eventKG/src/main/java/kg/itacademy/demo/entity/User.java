@@ -45,4 +45,7 @@ public class User {
 
     @Column(name = "photo_id")
     private Long photoId;
+
+    @Column(name = "status", nullable = false)
+    private Long status;
 }

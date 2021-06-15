@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
             throw new AuthException("Введите другой Email");
         } else {
             user.setCreationDate(LocalDateTime.now());
+            user.setStatus((long) 1);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user = userRepository.save(user);
             UserRole userRole = new UserRole();
