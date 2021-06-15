@@ -38,12 +38,12 @@ public class EventServiceImpl implements EventService{
                 .mainPhoto(photoService.findById(eventModel.getMainPhotoId()))
                 .title(eventModel.getTitle())
                 .description(eventModel.getDescription())
-                .views(eventModel.getViews())
+                .views((long) 0)
                 .creationDate(LocalDateTime.now())
                 .startDate(eventModel.getStartDate())
                 .endDate(eventModel.getEndDate())
                 .eventStatus(eventStatusService.findById(eventModel.getEventStatusId()))
-                .eventType(eventTypeService.findById(eventModel.getCreatorId()))
+                .eventType(eventTypeService.findById(eventModel.getEventTypeId()))
                 .build();
         return eventRepository.save(event);
     }

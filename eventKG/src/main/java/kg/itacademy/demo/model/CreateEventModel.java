@@ -9,14 +9,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateEventModel {
-    Long creatorId;
     Long mainPhotoId;
     Long eventTypeId;
     Long eventStatusId;
     String title;
     String description;
-    Long views;
-    LocalDateTime creationDate = LocalDateTime.now();
     LocalDateTime startDate;
     LocalDateTime endDate;
 }
