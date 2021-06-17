@@ -37,7 +37,7 @@ public class Event {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "views")
+    @Column(name = "views", nullable = false)
     private Long views;
 
     @Column(name = "creation_date", nullable = false)
@@ -50,11 +50,11 @@ public class Event {
     private LocalDateTime endDate;
 
     @ManyToOne //???
-    @JoinColumn(name = "event_type")
+    @JoinColumn(name = "event_type", nullable = false)
     private EventType eventType;
 
     @ManyToOne //???
-    @JoinColumn(name = "event_status")
+    @JoinColumn(name = "event_status", nullable = false)
     private EventStatus eventStatus;
 }
 

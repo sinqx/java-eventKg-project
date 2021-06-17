@@ -5,6 +5,8 @@ import kg.itacademy.demo.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class PhotoServiceImpl implements PhotoService {
     @Autowired
@@ -12,7 +14,8 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public Photo save(Photo photo) {
-        return photoRepository.save(photo); //??????
+        photo.setCreationaDate(LocalDateTime.now());
+        return photoRepository.save(photo);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class ReactionController {
 
     @GetMapping("/my")
     public List<Reaction> getAllUserReactions() {
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        return reactionService.getAllUserReactions(name);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return reactionService.getAllUserReactions(username);
     }
 }

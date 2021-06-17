@@ -1,6 +1,7 @@
 package kg.itacademy.demo.controller;
 
 import kg.itacademy.demo.entity.EventPhoto;
+import kg.itacademy.demo.model.CreateEventPhotoModel;
 import kg.itacademy.demo.service.EventPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,8 @@ public class EventPhotoController {
     private EventPhotoService eventPhotoService;
 
     @PostMapping
-    public EventPhoto save(@RequestBody EventPhoto eventPhoto){
-        return eventPhotoService.save(eventPhoto);
+    public EventPhoto save(@RequestBody CreateEventPhotoModel  eventPhotoModel){
+        return eventPhotoService.save(eventPhotoModel);
     }
 
     @GetMapping("/{eventPhotoId}")

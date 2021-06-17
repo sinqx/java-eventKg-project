@@ -18,7 +18,7 @@ public class EventPhoto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "photo_id", nullable = false)
+    @JoinColumn(name = "photo_id", nullable = false, unique = true)
     @ManyToOne
     private Photo photo;
 

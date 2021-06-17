@@ -26,6 +26,6 @@ public class Photo {
     @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationaDate;
 
-    @Column(name = "URL", nullable = false)
+    @Column(name = "URL", unique = true, nullable = false)
     private String URL;
 }

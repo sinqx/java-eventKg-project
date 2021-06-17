@@ -9,5 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateGuestModel {
     Long eventId;
-    Boolean status;
 }

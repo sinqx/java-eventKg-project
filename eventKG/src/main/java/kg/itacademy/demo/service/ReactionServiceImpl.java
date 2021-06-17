@@ -1,5 +1,6 @@
 package kg.itacademy.demo.service;
 
+import kg.itacademy.demo.entity.Photo;
 import kg.itacademy.demo.entity.Reaction;
 import kg.itacademy.demo.entity.User;
 import kg.itacademy.demo.model.CreateReactionModel;
@@ -55,7 +56,9 @@ public class ReactionServiceImpl implements ReactionService{
     }
 
     @Override
-    public List<Reaction> getAllUserReactions(String name) {
+    public List<Reaction> getAllUserReactions(String username) {
+        User user = userService.findByLogin(username);
+        String name = user.getFullName();
         return reactionRepository.findAllByUser_FullName(name);
     }
 

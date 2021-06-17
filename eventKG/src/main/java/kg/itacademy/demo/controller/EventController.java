@@ -31,4 +31,7 @@ public class EventController {
 
     @GetMapping
     public List<Event> getAllEvents(){return eventService.getAllEvents();}
+
+    @GetMapping("/like/{title}")
+    public List<Event> getAllEventsByPartOfName(@PathVariable String title){return eventService.getAllEventsByPartOfName(title);}
 }

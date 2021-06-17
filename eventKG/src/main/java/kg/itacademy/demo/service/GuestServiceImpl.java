@@ -3,8 +3,8 @@ package kg.itacademy.demo.service;
 import kg.itacademy.demo.entity.Event;
 import kg.itacademy.demo.entity.Guest;
 import kg.itacademy.demo.entity.User;
+import kg.itacademy.demo.model.AuthModel;
 import kg.itacademy.demo.model.CreateGuestModel;
-import kg.itacademy.demo.repository.EventRepository;
 import kg.itacademy.demo.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,11 +32,30 @@ public class GuestServiceImpl implements GuestService{
     public Guest save(CreateGuestModel guestModel) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByLogin(username);
-        Guest guest = Guest.builder()
-                .event(eventService.findById(guestModel.getEventId()))
-                .user(user)
-                .build();
-        return guestRepository.save(guest);
+        Long checkUser = user.getId();
+        Event event = eventService.findById(guestModel.getEventId());
+        if(guestRepository.findByUser_Id(checkUser) != null){
+            return null;
+        }else{
+            Guest guest = Guest.builder()
+                    .event(eventService.findById(guestModel.getEventId()))
+                    .user(user)
+                    .status(false)
+                    .build();
+                    event.setViews(event.getViews() + 1);
+                    eventService.save(event);
+            return guestRepository.save(guest);
+        }
+    }
+
+    @Override
+    public String addGuest() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByLogin(username);
+        Guest guest = guestRepository.findByUser_Id(user.getId());
+        guest.setStatus(!guest.getStatus());
+        save(guest);
+        return "Work";
     }
 
     @Override

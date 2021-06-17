@@ -1,6 +1,7 @@
 package kg.itacademy.demo.controller;
 
 import kg.itacademy.demo.entity.Guest;
+import kg.itacademy.demo.model.AuthModel;
 import kg.itacademy.demo.model.CreateGuestModel;
 import kg.itacademy.demo.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,11 @@ public class GuestController {
     @Autowired
     private GuestService guestService;
 
+    @PostMapping("/go")
+    public String addGuest(){return guestService.addGuest( );}
+
     @PostMapping
-    public Guest save(@RequestBody CreateGuestModel guestModel){
+    public Guest addView(@RequestBody CreateGuestModel guestModel){
         return guestService.save(guestModel);
     }
 

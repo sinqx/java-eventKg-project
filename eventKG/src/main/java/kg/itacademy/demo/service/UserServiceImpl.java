@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByLogin(String username) {
-        return userRepository.findByFullName(username).orElse(null);// Вернуть исключение и доделать
+        return userRepository.findByLogin(username).orElse(null);// Вернуть исключение и доделать
     }
 
     @Override
@@ -98,5 +98,10 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         return null;// Вернуть исключение
+    }
+
+    @Override
+    public List<User> findUsersByPartOfFullName(String name) {
+        return userRepository.findByFullNameContainingIgnoringCase(name);
     }
 }

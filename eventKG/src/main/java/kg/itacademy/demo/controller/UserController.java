@@ -33,4 +33,7 @@ public class UserController {
     public User deleteById(@PathVariable Long userId){
         return userService.deleteById(userId);
     }
+
+    @GetMapping("/like/{name}")
+    public List<User> findUsersByPartOfFullName(@PathVariable String name){ return userService.findUsersByPartOfFullName(name);}
 }
