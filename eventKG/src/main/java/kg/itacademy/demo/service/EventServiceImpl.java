@@ -69,7 +69,12 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<Event> getAllEventsByPartOfName(String title) {
-        return eventRepository.findByTitleContainingIgnoringCase(title);
+    public List<Event> getAllEventsByCategory(Long categoryId) {
+        return eventRepository.findByEventTypeOrderByCreationDate(categoryId);
+    }
+
+    @Override
+    public List<Event> getAllEventsByPartOfTitle(String title) {
+        return eventRepository.findByTitleContainingIgnoringCaseOrderByCreationDate(title);
     }
 }

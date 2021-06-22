@@ -11,5 +11,6 @@ public interface EventService {
     Event findById(Long id);
     Event deleteById(Long id);
     List<Event> getAllEvents();
-    List<Event> getAllEventsByPartOfName(String name);
+    List<Event> getAllEventsByCategory(Long categoryId);
+    List<Event> getAllEventsByPartOfTitle(String name);
 }

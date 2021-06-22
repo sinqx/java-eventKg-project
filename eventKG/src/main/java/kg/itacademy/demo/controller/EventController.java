@@ -33,5 +33,10 @@ public class EventController {
     public List<Event> getAllEvents(){return eventService.getAllEvents();}
 
     @GetMapping("/like/{title}")
-    public List<Event> getAllEventsByPartOfName(@PathVariable String title){return eventService.getAllEventsByPartOfName(title);}
+    public List<Event> getAllEventsByPartOfTitle(@PathVariable String title){return eventService.getAllEventsByPartOfTitle(title);}
+
+    @GetMapping("/category/{categoryId}")
+    public List<Event> getAllEventsByCategory(@PathVariable Long categoryId){return  eventService.getAllEventsByCategory(categoryId);}
+
+    //ивенты по категориям
 }
