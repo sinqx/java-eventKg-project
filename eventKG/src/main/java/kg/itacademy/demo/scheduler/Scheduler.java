@@ -18,8 +18,8 @@ public class Scheduler {
     @Autowired
     private EventStatusService eventStatusService;
 
-    // @Scheduled(cron = "0 0 12 * * *")
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "0 0 12 * * *")
+    //@Scheduled(cron = "*/5 * * * * *")
     public void eventStatusChange() {
         List<Event> events = eventService.getAllEvents();
         LocalDate today = LocalDate.now();
@@ -28,15 +28,13 @@ public class Scheduler {
         for (Event event : events) {
             startDayWithTime = event.getStartDate();
             startDay = LocalDate.from(startDayWithTime);
+
             if (startDay.isBefore(today)) {
                 changeStatus((long) 1, event);
-//                System.out.println("ещё не прошло");
             } else if (startDay.equals(today)) {
                 changeStatus((long) 2, event);
-//                System.out.println("в процессе");
             } else {
                 changeStatus((long) 3, event);
-//                System.out.println("уже прошло");
             }
         }
     }
