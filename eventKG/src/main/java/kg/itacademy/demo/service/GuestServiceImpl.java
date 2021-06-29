@@ -29,16 +29,15 @@ public class GuestServiceImpl implements GuestService{
     }
 
     @Override
-    public Guest save(CreateGuestModel guestModel) {
+    public Guest save(Long eventId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByLogin(username);
-        Long checkUser = user.getId();
-        Event event = eventService.findById(guestModel.getEventId());
-        if(guestRepository.findByUser_Id(checkUser) != null){
+        Event event = eventService.findById(eventId);
+        if(guestRepository.findByUser_IdAndEventId(user.getId(), eventId) != null){
             return null;
         }else{
             Guest guest = Guest.builder()
-                    .event(eventService.findById(guestModel.getEventId()))
+                    .event(event)
                     .user(user)
                     .status(false)
                     .build();
@@ -49,10 +48,10 @@ public class GuestServiceImpl implements GuestService{
     }
 
     @Override
-    public String addGuest() {
+    public String addGuest(Long eventId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByLogin(username);
-        Guest guest = guestRepository.findByUser_Id(user.getId());
+        Guest guest = guestRepository.findByUser_IdAndEventId(user.getId(), eventId);
         guest.setStatus(!guest.getStatus());
         save(guest);
         return "Work";

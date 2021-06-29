@@ -15,12 +15,12 @@ public class GuestController {
     @Autowired
     private GuestService guestService;
 
-    @PostMapping("/go")
-    public String addGuest(){return guestService.addGuest( );}
+    @PostMapping("/go/{eventId}")
+    public String addGuest(@PathVariable Long eventId){return guestService.addGuest(eventId);}
 
-    @PostMapping
-    public Guest addView(@RequestBody CreateGuestModel guestModel){
-        return guestService.save(guestModel);
+    @PostMapping("/{eventId}")
+    public Guest addView(@PathVariable Long eventId){
+        return guestService.save(eventId);
     }
 
     @GetMapping("/{guestId}")
