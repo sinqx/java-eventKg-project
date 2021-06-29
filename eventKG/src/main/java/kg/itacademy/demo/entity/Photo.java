@@ -28,4 +28,10 @@ public class Photo {
 
     @Column(name = "URL", unique = true, nullable = false)
     private String URL;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "format", nullable = false)
+    private String format;
 }

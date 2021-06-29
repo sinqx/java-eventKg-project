@@ -4,6 +4,7 @@ import kg.itacademy.demo.entity.Photo;
 import kg.itacademy.demo.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/photos")
@@ -12,8 +13,9 @@ public class PhotoController {
     private PhotoService photoService;
 
     @PostMapping
-    public Photo save(@RequestBody Photo photo){
-        return photoService.save(photo);
+    public Photo save(@RequestParam(name = "file") MultipartFile multipartFile){
+        System.out.println("test1");
+        return photoService.save(multipartFile);
     }
 
     @GetMapping("/{photoId}")
