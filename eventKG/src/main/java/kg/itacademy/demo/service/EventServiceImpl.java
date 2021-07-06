@@ -23,8 +23,6 @@ public class EventServiceImpl implements EventService{
     private UserService userService;
     @Autowired
     private PhotoService photoService;
-    @Autowired
-    private GuestService guestService;
 
     @Override
     public Event save(Event event) {
