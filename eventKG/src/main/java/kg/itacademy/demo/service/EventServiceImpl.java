@@ -90,7 +90,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getAllEventsByCategory(Long categoryId) {
         try {
-            return eventRepository.findByEventTypeOrderByCreationDate(categoryId);
+            return eventRepository.findByEventTypeIdOrderByCreationDate(categoryId);
         } catch (NullPointerException ignored) {
             throw new ObjectNotFoundException("List is empty :(.\n" +
                     " Be the first, who create the event in" + eventStatusService.findById(categoryId) + "category!");
