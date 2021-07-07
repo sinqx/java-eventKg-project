@@ -1,5 +1,6 @@
 package kg.itacademy.demo.service;
 
+import kg.itacademy.demo.entity.Photo;
 import kg.itacademy.demo.entity.Reaction;
 import kg.itacademy.demo.entity.User;
 import kg.itacademy.demo.exception.ObjectNotFoundException;
@@ -31,7 +32,8 @@ public class ReactionServiceImpl implements ReactionService {
     @Override
     public Reaction save(CreateReactionModel reactionModel) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (reactionModel.getText() == null || reactionModel.getText().equals(" ")) {
+        Photo photo = photoService.findById(reactionModel.getPhotoId());
+        if (reactionModel.getText() == null || reactionModel.getText().equals(" ") || reactionModel.getText().equals("")) {
             throw new ObjectNotFoundException("Please, write down your message");
         } else {
             User user = userService.findByLogin(username);
@@ -40,7 +42,7 @@ public class ReactionServiceImpl implements ReactionService {
                     .event(eventService.findById(reactionModel.getEventId()))
                     .text(reactionModel.getText())
                     .publicationDate(LocalDateTime.now())
-                    .photo(photoService.findById(reactionModel.getPhotoId()))
+                    .photo(photo)
                     .build();
             return reactionRepository.save(reaction);
         }

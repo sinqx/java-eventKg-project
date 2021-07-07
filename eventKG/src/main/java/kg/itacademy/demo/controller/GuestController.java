@@ -16,8 +16,8 @@ public class GuestController {
     private GuestService guestService;
 
     @PostMapping("/go/{eventId}")
-    public void addGuest(@PathVariable Long eventId) {
-        guestService.addGuest(eventId);
+    public Guest addGuest(@PathVariable Long eventId) {
+        return guestService.addGuest(eventId);
     }
 
     @PostMapping("/{eventId}")

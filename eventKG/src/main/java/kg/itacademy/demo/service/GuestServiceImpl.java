@@ -47,12 +47,12 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public void addGuest(Long eventId) {
+    public Guest addGuest(Long eventId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByLogin(username);
         Guest guest = guestRepository.findByUser_IdAndEventId(user.getId(), eventId);
         guest.setStatus(!guest.getStatus());
-        save(guest);
+        return save(guest);
     }
 
     @Override
