@@ -47,7 +47,7 @@ public class ReactionController {
         }
     }
 
-    @GetMapping("/eventReaction/{eventId}") //???????
+    @GetMapping("/eventReaction/{eventId}")
     public ResponseEntity getAllEventReactions(@PathVariable Long eventId) {
         try {
             List<Reaction> reactions = reactionService.getAllEventReactions(eventId);
