@@ -11,5 +11,6 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByTitleContainingIgnoringCaseOrderByCreationDate(String title);
     List<Event> findByEventTypeIdOrderByCreationDate(Long categoryId);
+    List<Event> findByEventTypeIdOrderByViews(Long categoryId);
     Event findByCreatorUserIdAndEventStatus(Long id, EventStatus status);
 }

@@ -11,6 +11,7 @@ public interface EventService {
     Event findById(Long id);
     String deleteById(Long id);
     List<Event> getAllEvents();
-    List<Event> getAllEventsByCategory(Long categoryId);
+    List<Event> getAllNewEventsByCategory(Long categoryId);
+    List<Event> getAllTopEventsByCategory(Long categoryId);
     List<Event> getAllEventsByPartOfTitle(String name);
 }

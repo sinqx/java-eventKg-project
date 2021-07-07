@@ -67,10 +67,19 @@ public class EventController {
         }
     }
 
-    @GetMapping("/category/{categoryId}")
-    public ResponseEntity getAllEventsByCategory(@PathVariable Long categoryId) {
+    @GetMapping("/new/{categoryId}")
+    public ResponseEntity getAllNewEventsByCategory(@PathVariable Long categoryId) {
         try {
-            List<Event> events = eventService.getAllEventsByCategory(categoryId);
+            List<Event> events = eventService.getAllNewEventsByCategory(categoryId);
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
+    }
+    @GetMapping("/top/{categoryId}")
+    public ResponseEntity getAllTopEventsByCategory(@PathVariable Long categoryId) {
+        try {
+            List<Event> events = eventService.getAllTopEventsByCategory(categoryId);
             return new ResponseEntity<>(events, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
