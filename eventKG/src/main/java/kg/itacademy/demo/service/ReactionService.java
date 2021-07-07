@@ -12,5 +12,5 @@ public interface ReactionService {
     Reaction deleteById(Long id);
     List<Reaction> getAllReactions();
     List<Reaction> getAllEventReactions(Long eventId);
-    List<Reaction> getAllUserReactions(String username);
+    List<Reaction> getAllUserReactions();
 }

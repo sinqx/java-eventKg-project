@@ -73,8 +73,10 @@ public class ReactionServiceImpl implements ReactionService {
     }
 
     @Override
-    public List<Reaction> getAllUserReactions(String username) {
-        List<Reaction> reactions = reactionRepository.findAllByUser_FullName(username);
+    public List<Reaction> getAllUserReactions() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByLogin(username);
+        List<Reaction> reactions = reactionRepository.findAllByUserId(user.getId());
         if (reactions.isEmpty()) {
             throw new ObjectNotFoundException("You have not posted any comments yet.");
         } else

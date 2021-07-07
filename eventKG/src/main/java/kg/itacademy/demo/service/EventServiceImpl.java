@@ -89,30 +89,33 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getAllNewEventsByCategory(Long categoryId) {
-        try {
-            return eventRepository.findByEventTypeIdOrderByCreationDate(categoryId);
-        } catch (NullPointerException ignored) {
+        List<Event> events = eventRepository.findByEventTypeIdOrderByCreationDate(categoryId);
+        if (events.isEmpty()) {
             throw new ObjectNotFoundException("List is empty :(.\n" +
                     " Be the first, who create the event in" + eventStatusService.findById(categoryId) + "category!");
+        } else {
+            return events;
         }
     }
 
     @Override
     public List<Event> getAllTopEventsByCategory(Long categoryId) {
-        try {
-            return eventRepository.findByEventTypeIdOrderByViews(categoryId);
-        } catch (NullPointerException ignored) {
+        List<Event> events = eventRepository.findByEventTypeIdOrderByViews(categoryId);
+        if (events.isEmpty()) {
             throw new ObjectNotFoundException("List is empty :(.\n" +
                     " Be the first, who create the event in" + eventStatusService.findById(categoryId) + "category!");
+        } else {
+            return events;
         }
     }
 
     @Override
     public List<Event> getAllEventsByPartOfTitle(String title) {
-        try {
-            return eventRepository.findByTitleContainingIgnoringCaseOrderByCreationDate(title);
-        } catch (NullPointerException ignored) {
+        List<Event> events = eventRepository.findByTitleContainingIgnoringCaseOrderByCreationDate(title);
+        if (events.isEmpty()) {
             throw new ObjectNotFoundException("No related events found");
+        } else {
+            return events;
         }
     }
 }

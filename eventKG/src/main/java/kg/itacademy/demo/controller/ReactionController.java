@@ -60,8 +60,7 @@ public class ReactionController {
     @GetMapping("/my")
     public ResponseEntity getAllUserReactions() {
         try {
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            List<Reaction> reactions = reactionService.getAllUserReactions(username);
+            List<Reaction> reactions = reactionService.getAllUserReactions();
             return new ResponseEntity<>(reactions, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);

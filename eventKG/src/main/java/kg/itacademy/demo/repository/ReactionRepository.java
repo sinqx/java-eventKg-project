@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ReactionRepository  extends JpaRepository<Reaction, Long> {
-    List<Reaction> findAllByUser_FullName(String name);
+    List<Reaction> findAllByUserId(Long id);
     List<Reaction> findAllByEvent_Id(Long id);
 }
