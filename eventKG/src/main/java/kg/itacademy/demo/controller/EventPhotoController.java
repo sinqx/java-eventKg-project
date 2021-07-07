@@ -25,8 +25,8 @@ public class EventPhotoController {
     }
 
     @DeleteMapping("/{eventPhotoId}")
-    public EventPhoto deleteById(@PathVariable Long eventPhotoId){
-        return eventPhotoService.deleteById(eventPhotoId);
+    public EventPhoto deleteAllByEventId(@PathVariable Long eventPhotoId){
+        return eventPhotoService.deleteAllByEventId(eventPhotoId);
     }
 
     @GetMapping("/event/{eventId}")
