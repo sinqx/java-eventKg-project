@@ -63,7 +63,7 @@ public class ReactionServiceImpl implements ReactionService {
 
     @Override
     public List<Reaction> getAllEventReactions(Long eventId) {
-        List<Reaction> reactions = reactionRepository.findAll();
+        List<Reaction> reactions = reactionRepository.findAllByEvent_Id(eventId);
         if (reactions.isEmpty()) {
             throw new ObjectNotFoundException("no one has left a comment yet :(. \n Be first! Write your comment right now!");
         } else
@@ -72,7 +72,7 @@ public class ReactionServiceImpl implements ReactionService {
 
     @Override
     public List<Reaction> getAllUserReactions(String username) {
-        List<Reaction> reactions = reactionRepository.findAll();
+        List<Reaction> reactions = reactionRepository.findAllByUser_FullName(username);
         if (reactions.isEmpty()) {
             throw new ObjectNotFoundException("You have not posted any comments yet.");
         } else

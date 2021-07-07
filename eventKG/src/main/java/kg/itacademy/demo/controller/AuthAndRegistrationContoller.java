@@ -18,8 +18,6 @@ public class AuthAndRegistrationContoller {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @PostMapping("/sign-up")
     public ResponseEntity save(@RequestBody User user) {

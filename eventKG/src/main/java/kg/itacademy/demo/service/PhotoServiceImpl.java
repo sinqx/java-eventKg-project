@@ -34,7 +34,7 @@ public class PhotoServiceImpl implements PhotoService {
             multipartFile.transferTo(file);
             Cloudinary cloudinary = new Cloudinary(CLOUDINARY_URL);
             Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
-            photo.setCreationaDate(LocalDateTime.now());
+            photo.setCreationDate(LocalDateTime.now());
             photo.setURL((String) uploadResult.get("url"));
             photo.setName((String) uploadResult.get("public_id"));
             photo.setFormat((String) uploadResult.get("format"));

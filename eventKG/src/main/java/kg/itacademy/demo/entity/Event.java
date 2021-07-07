@@ -49,11 +49,11 @@ public class Event {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    @ManyToOne //???
+    @ManyToOne
     @JoinColumn(name = "event_type", nullable = false)
     private EventType eventType;
 
-    @ManyToOne //???
+    @ManyToOne
     @JoinColumn(name = "event_status", nullable = false)
     private EventStatus eventStatus;
 }
