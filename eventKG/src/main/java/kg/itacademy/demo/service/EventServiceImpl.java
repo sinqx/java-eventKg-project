@@ -92,7 +92,7 @@ public class EventServiceImpl implements EventService {
         List<Event> events = eventRepository.findByEventTypeIdOrderByCreationDate(categoryId);
         if (events.isEmpty()) {
             throw new ObjectNotFoundException("List is empty :(.\n" +
-                    " Be the first, who create the event in" + eventTypeService.findById(categoryId).getEventName() + "category!");
+                    " Be the first, who create the event in \"" + eventTypeService.findById(categoryId).getEventName() + "\" category!");
         } else {
             return events;
         }
@@ -103,7 +103,7 @@ public class EventServiceImpl implements EventService {
         List<Event> events = eventRepository.findByEventTypeIdOrderByViews(categoryId);
         if (events.isEmpty()) {
             throw new ObjectNotFoundException("List is empty :(.\n" +
-                    " Be the first, who create the event in" + eventTypeService.findById(categoryId).getEventName() + "category!");
+                    " Be the first, who create the event in \"" + eventTypeService.findById(categoryId).getEventName() + "\" category!");
         } else {
             return events;
         }
