@@ -9,7 +9,7 @@ public interface EventService {
     Event save(Event event);
     Event save(CreateEventModel eventModel);
     Event findById(Long id);
-    Event deleteById(Long id);
+    String deleteById(Long id);
     List<Event> getAllEvents();
     List<Event> getAllEventsByCategory(Long categoryId);
     List<Event> getAllEventsByPartOfTitle(String name);

@@ -9,6 +9,6 @@ public interface EventPhotoService {
     EventPhoto save(EventPhoto eventPhoto);
     EventPhoto save(CreateEventPhotoModel eventPhotoModel);
     EventPhoto findById(Long id);
-    EventPhoto deleteById(Long id);
+    EventPhoto deleteAllByEventId(Long id);
     List<EventPhoto> getAllEventPhoto(Long id);
 }

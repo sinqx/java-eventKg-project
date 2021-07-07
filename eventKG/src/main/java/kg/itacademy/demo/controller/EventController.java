@@ -4,6 +4,8 @@ import kg.itacademy.demo.entity.Event;
 import kg.itacademy.demo.model.CreateEventModel;
 import kg.itacademy.demo.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +17,63 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping
-    public Event save(@RequestBody CreateEventModel eventModel){
-        return eventService.save(eventModel);
+    public ResponseEntity save(@RequestBody CreateEventModel eventModel) {
+        try {
+            Event event = eventService.save(eventModel);
+            return new ResponseEntity<>(event, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
+
     }
 
     @GetMapping("/{eventId}")
-    public Event getById(@PathVariable Long eventId){
-        return eventService.findById(eventId);
+    public ResponseEntity findById(@PathVariable Long eventId) {
+        try {
+            Event event = eventService.findById(eventId);
+            return new ResponseEntity<>(event, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("/{eventId}")
-    public Event deleteById(@PathVariable Long eventId){
-        return eventService.deleteById(eventId);
+    public ResponseEntity deleteById(@PathVariable Long eventId) {
+        try {
+            String answer = eventService.deleteById(eventId);
+            return new ResponseEntity<>(answer, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
     }
 
     @GetMapping
-    public List<Event> getAllEvents(){return eventService.getAllEvents();}
+    public ResponseEntity getAllEvents() {
+        try {
+            List<Event> events = eventService.getAllEvents();
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
+    }
 
-    @GetMapping("/like/{title}")
-    public List<Event> getAllEventsByPartOfTitle(@PathVariable String title){return eventService.getAllEventsByPartOfTitle(title);}
+    @GetMapping("/search/{title}")
+    public ResponseEntity getAllEventsByPartOfTitle(@PathVariable String title) {
+        try {
+            List<Event> events = eventService.getAllEventsByPartOfTitle(title);
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
+    }
 
     @GetMapping("/category/{categoryId}")
-    public List<Event> getAllEventsByCategory(@PathVariable Long categoryId){return  eventService.getAllEventsByCategory(categoryId);}
-
-    //ивенты по категориям
+    public ResponseEntity getAllEventsByCategory(@PathVariable Long categoryId) {
+        try {
+            List<Event> events = eventService.getAllEventsByCategory(categoryId);
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
+    }
 }

@@ -4,6 +4,8 @@ import kg.itacademy.demo.entity.Reaction;
 import kg.itacademy.demo.model.CreateReactionModel;
 import kg.itacademy.demo.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,33 +18,53 @@ public class ReactionController {
     private ReactionService reactionService;
 
     @PostMapping
-    public Reaction save(@RequestBody CreateReactionModel reactionModel){
-        return reactionService.save(reactionModel);
+    public ResponseEntity save(@RequestBody CreateReactionModel reactionModel) {
+        try {
+            Reaction reaction = reactionService.save(reactionModel);
+            return new ResponseEntity<>(reaction, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
     }
 
     @GetMapping("/{reactionId}")
-    public Reaction getById(@PathVariable Long reactionId){
+    public Reaction getById(@PathVariable Long reactionId) {
         return reactionService.findById(reactionId);
     }
 
     @DeleteMapping("/{reactionId}")
-    public Reaction deleteById(@PathVariable Long reactionId){
+    public Reaction deleteById(@PathVariable Long reactionId) {
         return reactionService.deleteById(reactionId);
     }
 
     @GetMapping
-    public List<Reaction> getAllReactions() {
-        return reactionService.getAllReactions();
+    public ResponseEntity getAllReactions() {
+        try {
+            List<Reaction> reactions = reactionService.getAllReactions();
+            return new ResponseEntity<>(reactions, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
     }
 
     @GetMapping("/eventReaction/{eventId}") //???????
-    public List<Reaction> getAllEventReactions(@PathVariable Long eventId) {
-        return reactionService.getAllEventReactions(eventId);
+    public ResponseEntity getAllEventReactions(@PathVariable Long eventId) {
+        try {
+            List<Reaction> reactions = reactionService.getAllEventReactions(eventId);
+            return new ResponseEntity<>(reactions, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
     }
 
     @GetMapping("/my")
-    public List<Reaction> getAllUserReactions() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return reactionService.getAllUserReactions(username);
+    public ResponseEntity getAllUserReactions() {
+        try {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            List<Reaction> reactions = reactionService.getAllUserReactions(username);
+            return new ResponseEntity<>(reactions, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
     }
 }

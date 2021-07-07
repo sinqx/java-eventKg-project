@@ -3,6 +3,7 @@ package kg.itacademy.demo.service;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import kg.itacademy.demo.entity.Photo;
+import kg.itacademy.demo.exception.ObjectNotFoundException;
 import kg.itacademy.demo.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 
@@ -39,22 +41,32 @@ public class PhotoServiceImpl implements PhotoService {
             System.out.println(photo.getURL());
             return photoRepository.save(photo);
         } catch (Exception e) {
-            return null;
+            throw new ObjectNotFoundException("Something went wrong");
         }
     }
 
     @Override
     public Photo findById(Long id) {
-        return photoRepository.findById(id).orElse(null);// Вернуть исключение
+        return photoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Photo with id \"" + id + "\" doesn't exist"));// Вернуть исключение
     }
 
     @Override
-    public Photo deleteById(Long id) {
-        Photo photo = findById(id);
-        if (photo != null) {
-            photoRepository.delete(photo);
-            return photo;
+    public List<Photo> getAllPhotos() {
+        try {
+            return photoRepository.findAll();
+        } catch (NullPointerException ignored) {
+            throw new ObjectNotFoundException("List is empty");
         }
-        return null;// Вернуть исключение
+    }
+
+    @Override
+    public String deleteById(Long id) {
+        Photo photo = findById(id);
+        if (photo == null) {
+            throw new ObjectNotFoundException("Photo with id \"" + id + "\" doesn't exist");
+        } else {
+            photoRepository.delete(photo);
+            return "photo with id \"" + id + "\" is deleted";
+        }
     }
 }

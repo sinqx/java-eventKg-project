@@ -24,15 +24,20 @@ public class AuthAndRegistrationContoller {
     @PostMapping("/sign-up")
     public ResponseEntity save(@RequestBody User user) {
         try {
-            User user1 = userService.saveWithPasswordEncode(user);
-            return new ResponseEntity<>(user1, HttpStatus.OK);
+            User newUser = userService.saveWithPasswordEncode(user);
+            return new ResponseEntity<>(newUser, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
         }
     }
 
     @PostMapping("/sign-in")
-    public String getToken(@RequestBody AuthModel authModel) {
-        return userService.getTokenByAuthModel(authModel);
+    public ResponseEntity getToken(@RequestBody AuthModel authModel) {
+        try {
+            String token = userService.getTokenByAuthModel(authModel);
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
     }
 }

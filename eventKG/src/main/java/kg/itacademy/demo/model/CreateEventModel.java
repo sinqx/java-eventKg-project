@@ -11,9 +11,7 @@ import java.time.LocalDateTime;
 public class CreateEventModel {
     Long mainPhotoId;
     Long eventTypeId;
-    Long eventStatusId;
     String title;
     String description;
     LocalDateTime startDate;
-    LocalDateTime endDate;
 }

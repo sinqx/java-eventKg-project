@@ -1,6 +1,7 @@
 package kg.itacademy.demo.service;
 
 import kg.itacademy.demo.entity.EventPhoto;
+import kg.itacademy.demo.exception.ObjectNotFoundException;
 import kg.itacademy.demo.model.CreateEventPhotoModel;
 import kg.itacademy.demo.repository.EventPhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,21 +35,16 @@ public class EventPhotoServiceImpl implements EventPhotoService{
 
     @Override
     public EventPhoto findById(Long id) {
-        return eventPhotoRepository.findById(id).orElse(null);// Вернуть исключение
-    }
-
-    @Override
-    public EventPhoto deleteById(Long id) {
-        EventPhoto eventPhoto = findById(id);
-        if (eventPhoto != null) {
-            eventPhotoRepository.delete(eventPhoto);
-            return eventPhoto;
-        }
-        return null;// Вернуть исключение
+        return eventPhotoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Photo with id \"" + id + "\" doesn't exist"));
     }
 
     @Override
     public List<EventPhoto> getAllEventPhoto(Long id) {
         return eventPhotoRepository.findAllByEvent_Id(id);
+    }
+
+    @Override
+    public EventPhoto deleteAllByEventId(Long id) {
+        return eventPhotoRepository.deleteAllByEventId(id);
     }
 }

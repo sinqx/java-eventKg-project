@@ -1,10 +1,8 @@
 package kg.itacademy.demo.exception;
 
-public class AuthException extends RuntimeException {
-    private String message;
-
+public class AuthException extends RuntimeException{
     public AuthException(String message) {
-        super("Вы не можете сделать это: " + message);
+        super("Registration error: " + message);
     }
 }
 

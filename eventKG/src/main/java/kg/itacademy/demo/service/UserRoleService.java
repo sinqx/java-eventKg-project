@@ -8,4 +8,5 @@ public interface UserRoleService {
     UserRole save(UserRole userRole);
     UserRole save(RoleModel userRoleModel);
     UserRole findById(Long id);
+    void deleteById(Long id);
 }

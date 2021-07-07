@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface EventPhotoRepository extends JpaRepository<EventPhoto, Long> {
     List<EventPhoto> findAllByEvent_Id(Long id);
+    EventPhoto deleteAllByEventId(Long id);
 }
