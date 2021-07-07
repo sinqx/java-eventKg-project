@@ -47,7 +47,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public Photo findById(Long id) {
-        return photoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Photo with id \"" + id + "\" doesn't exist"));// Вернуть исключение
+        return photoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Photo with id \"" + id + "\" doesn't exist"));
     }
 
     @Override
